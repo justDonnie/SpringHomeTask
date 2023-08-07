@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="application.properties"/>
+    <bean id = "hrDepartment"
+          class = "peaksoft.HRDepartment">
+        <constructor-arg value="${doni.name}"/>
+        <constructor-arg value="${doni.surname}"/>
+    </bean>
+
+
+    <bean id = "businessDepartment"
+          class = "peaksoft.BusinessDepartment">
+    </bean>
+    <bean id = "projectDepartment"
+          class = "peaksoft.ProjectDepartment">
+    </bean>
+
+<!--    <bean id = "department"-->
+<!--          class="peaksoft.Department">-->
+<!--        <constructor-arg ref = "businessDepartment">-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+    <bean id = "department"
+          class="peaksoft.Department">
+        <property name="departmentService">
+            <list>
+                <ref bean= "hrDepartment"/>
+            </list>
+        </property>
+        <property name="name" value="${dep.description}"/>
+        <property name="description" value="${dep.name}"/>
+    </bean>
+
+</beans>
